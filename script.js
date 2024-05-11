@@ -2,7 +2,7 @@ let isPlaying = false;
 let timer;
 
 function playClick() {
-  const click = new Audio('click.mp3');
+  const click = new Audio('click.wav');
   click.play();
 }
 
