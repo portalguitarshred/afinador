@@ -1,38 +1,47 @@
-const strings = document.querySelectorAll('.slider');
-const playButtons = document.querySelectorAll('.play-note');
-const audio = document.getElementById('audio');
+window.onload = function() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioContext.createAnalyser();
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
 
-const notes = {
-    'E': 329.63,
-    // Adicione as frequências para as outras notas
-};
+    navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(stream) {
+            const source = audioContext.createMediaStreamSource(stream);
+            source.connect(analyser);
+            tune();
+        })
+        .catch(function(err) {
+            console.error('Erro ao acessar o microfone:', err);
+        });
 
-strings.forEach((string, index) => {
-    string.addEventListener('input', function() {
-        const note = this.parentElement.querySelector('.tuning-note').innerText;
-        const frequency = 440 * Math.pow(2, (this.value - 50) / 12);
-        console.log(`Tuning ${note} - Frequency: ${frequency.toFixed(2)} Hz`);
+    function tune() {
+        requestAnimationFrame(tune);
+        analyser.getByteFrequencyData(dataArray);
         
-        // Calculate difference in cents
-        const diffCents = 1200 * Math.log2(frequency / notes[note]);
-        
-        // Update UI
-        if (Math.abs(diffCents) <= 10) {
-            this.style.backgroundColor = '#66ff66'; // Green
-        } else {
-            this.style.backgroundColor = '#ddd'; // Default color
-        }
-    });
+        // Exemplo de lógica para detectar frequência da nota E
+        const frequency = getFrequencyFromPitch(dataArray, audioContext.sampleRate);
+        const closestNote = getClosestNoteName(frequency);
+        const statusElement = document.getElementById('status1');
+        statusElement.textContent = `Tuning: ${closestNote}`;
+        // Adicione lógica semelhante para as outras cordas
+    }
 
-    playButtons[index].addEventListener('click', function() {
-        const note = this.parentElement.querySelector('.tuning-note').innerText;
-        const oscillator = audio.createOscillator();
-        oscillator.type = 'sine';
-        oscillator.frequency.value = notes[note];
-        oscillator.connect(audio.destination);
-        oscillator.start();
-        setTimeout(() => {
-            oscillator.stop();
-        }, 500); // Stop playing after 0.5 seconds
-    });
-});
+    function getFrequencyFromPitch(dataArray, sampleRate) {
+        const peak = Math.max(...dataArray);
+        const index = dataArray.indexOf(peak);
+        const hertzPerBin = sampleRate / bufferLength;
+        return index * hertzPerBin;
+    }
+
+    function getClosestNoteName(frequency) {
+        // Mapeie frequências para notas musicais
+        const notes = {
+            'E': 329.63,
+            // Adicione as frequências para as outras notas
+        };
+
+        let closestNote = '';
+        let minDiff = Infinity;
+        for (const note in notes) {
+            const diff = Math.abs(frequency - notes[note]);
+          
