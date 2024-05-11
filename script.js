@@ -8,17 +8,10 @@ function playClick() {
 
 function startStop() {
   const tempo = document.getElementById('tempo').value;
-  const timeSignature = document.getElementById('timeSignature').value;
   
   if (tempo > 0) {
     if (!isPlaying) {
-      const [beatsPerMeasure, beatValue] = timeSignature.split('/');
-      const interval = 60000 / tempo;
-
-      timer = setInterval(() => {
-        playClick();
-      }, interval);
-
+      timer = setInterval(playClick, 60000 / tempo);
       document.getElementById('startStop').innerText = 'Parar';
       isPlaying = true;
     } else {
