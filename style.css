@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #181818; /* Alterado para fundo escuro */
   margin: 0;
   padding: 0;
   display: flex;
@@ -12,6 +12,9 @@ body {
 .container {
   max-width: 360px;
   padding: 20px;
+  background-color: #fff; /* Adicionado para cor de fundo do contêiner */
+  border-radius: 10px; /* Adicionado para bordas arredondadas */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adicionado para sombra */
 }
 
 .metronome {
