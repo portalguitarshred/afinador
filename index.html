@@ -14,6 +14,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      position: relative; /* Adicionando posição relativa ao corpo */
     }
 
     .metronome {
@@ -28,10 +29,14 @@
     .logo {
       margin-bottom: 20px;
       width: 70%; /* Reduzindo o tamanho da imagem em 30% */
+      position: absolute; /* Posicionamento absoluto */
+      top: 30px; /* Distância do topo */
+      left: 50%; /* Centralizando horizontalmente */
+      transform: translateX(-50%); /* Ajustando para centralizar */
     }
 
     .controls {
-      margin-top: 10px; /* Reduzindo a margem superior */
+      margin-top: 20px;
       display: flex;
       align-items: center;
     }
