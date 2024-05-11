@@ -3,8 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Metronomo</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Metrônomo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #181818; /* Fundo escuro */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 360px;
+      padding: 20px;
+      background-color: #fff; /* Cor de fundo do contêiner */
+      border-radius: 10px; /* Bordas arredondadas */
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    }
+
+    .metronome {
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff !important;
+      color: #fff !important;
+      border: none !important;
+      border-radius: 5px !important;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3 !important;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -31,6 +88,39 @@
       </div>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script>
+    let isPlaying = false;
+    let timer;
+
+    function playClick() {
+      const click = new Audio('click.wav');
+      click.play();
+    }
+
+    function startStop() {
+      const tempo = document.getElementById('tempo').value;
+      
+      if (tempo > 0) {
+        if (!isPlaying) {
+          const interval = 60000 / tempo;
+
+          timer = setInterval(() => {
+            playClick();
+          }, interval);
+
+          document.getElementById('startStop').innerText = 'Parar';
+          isPlaying = true;
+        } else {
+          clearInterval(timer);
+          document.getElementById('startStop').innerText = 'Iniciar';
+          isPlaying = false;
+        }
+      } else {
+        alert('Digite um valor válido para o BPM.');
+      }
+    }
+
+    document.getElementById('startStop').addEventListener('click', startStop);
+  </script>
 </body>
 </html>
