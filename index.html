@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guitar Tuner</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metrônomo</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Guitar Tuner</h1>
-    <div id="tuner">
-        <div class="string">
-            <div class="tuning-note">E</div>
-            <div class="status" id="status1">Listening...</div>
-        </div>
-        <!-- Repeat for the rest of the strings -->
-    </div>
-
-    <script src="script.js"></script>
+  <div class="metronome">
+    <h1>Metrônomo</h1>
+    <button id="startStop">Iniciar</button>
+    <input type="number" id="tempo" placeholder="BPM">
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
