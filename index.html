@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Tuner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Guitar Tuner</h1>
+    <div id="tuner">
+        <div class="string">
+            <div class="tuning-note">E</div>
+            <input type="range" min="0" max="100" value="50" class="slider" id="string1">
+        </div>
+        <div class="string">
+            <div class="tuning-note">A</div>
+            <input type="range" min="0" max="100" value="50" class="slider" id="string2">
+        </div>
+        <!-- Repeat for the rest of the strings -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
