@@ -44,3 +44,8 @@ h1 {
     background: #4CAF50;
     cursor: pointer;
 }
+
+.play-note {
+    display: block;
+    margin-top: 10px;
+}
