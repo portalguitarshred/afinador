@@ -9,11 +9,11 @@ body {
   max-width: 360px;
   margin: 0 auto;
   padding: 20px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .metronome {
